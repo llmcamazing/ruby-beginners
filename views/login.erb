@@ -1,0 +1,25 @@
+<h2>Login</h2>
+
+<% if defined?(@user) && @user != nil %>
+	<p>You are already logged in!</p>
+<% else %>
+
+	<form method="POST" action="/login">
+
+		<label for="name">Enter Name:</label>
+		<input type="text" name="name"/>
+
+		<label for="password">Enter Password:</label>
+		<input type="password" name="password"/>
+
+		<input type="submit"/>
+
+		<% if defined?(error_msg) %>
+			<div class="error">
+				<p><%= error_msg %></p>
+			</div>
+		<% end %>
+
+	</form>
+
+<% end %>

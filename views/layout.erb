@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Ruby Beginner's Corner</title>
+	<style type="text/css">
+	#index ul { list-style: none; }
+	#index li { float: left; padding: 5px; }
+	</style>
+</head>
+<body>
+	<div id="wrapper">
+		<header>
+			<h1>Ruby Beginner's Corner</h1>
+		</header>
+		<nav>
+			<!--
+			
+			the following block of embedded ruby
+			allows you to have login/logout functionality
+			on every page!
+			
+			Can you figure out what's going on here?
+			
+			-->
+			<% if defined?(@user) && @user != nil %>
+				<p>You are logged in! :D</p>
+				<p>
+					<a href="/logout">Logout</a>
+				</p>
+			<% else %>
+				<p>You are not logged in. :(</p>
+				<p>
+					<a href="/login">Login</a>
+				</p>
+			<% end %>
+		</nav>
+		
+		<div id="content">
+			<%= yield %>
+		</div>
+		
+	</div>
+</body>
+</html>
