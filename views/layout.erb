@@ -3,15 +3,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Ruby Beginner's Corner</title>
-	<style type="text/css">
-	#index ul { list-style: none; }
-	#index li { float: left; padding: 5px; }
-	</style>
+	<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 	<div id="wrapper">
 		<header>
-			<h1>Ruby Beginner's Corner</h1>
+			<h1><a href="/">Ruby Beginner's Corner</a></h1>
 		</header>
 		<nav>
 			<!--
@@ -24,15 +21,11 @@
 			
 			-->
 			<% if defined?(@user) && @user != nil %>
-				<p>You are logged in! :D</p>
-				<p>
-					<a href="/logout">Logout</a>
-				</p>
+				<p>You are logged in as <%= @user.name %></p>
+				<a href="/logout">Logout</a>
 			<% else %>
-				<p>You are not logged in. :(</p>
-				<p>
-					<a href="/login">Login</a>
-				</p>
+				<p>You are not logged in.</p>
+				<a href="/login">Login</a>
 			<% end %>
 		</nav>
 		
