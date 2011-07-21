@@ -28,6 +28,16 @@ DataMapper.setup(:default, (ENV["DATABASE_URL"] || "sqlite3:///#{File.expand_pat
 
 enable :sessions
 
+# Helpers
+# *******
+helpers do
+  def partial template, opts = {}
+    erb template, opts.merge(:layout => false)
+  end
+  # partial :index, :locals => {:foo => bar}, :bar => 'foo', :money => 'yes please'
+  # partial :index
+end
+
 # Templates
 # *********
 # Sinatra assumes that templates are in the views folder.
@@ -37,7 +47,8 @@ enable :sessions
 # http://www.sinatrarb.com/intro
 
 configure do
-	set :views, "#{File.dirname(__FILE__)}/views"
+	#set :views, "#{File.dirname(__FILE__)}/views" # see below
+	set :views, "#{File.join(File.dirname(__FILE__), "views")}"
 end
 
 # Filters
@@ -69,7 +80,7 @@ end
 # and formatted according to your specifications
 
 post '/login/?' do
-	user = User.first :name => params[:name]
+	user = User.first :name => params['name']
 
 # Above, we're getting the name parameter sent to us
 # by the form set up inside of login.erb.
@@ -77,7 +88,7 @@ post '/login/?' do
 # Below we're checking with the database
 # to see if the password matches the username in the database.
 
-	if user and user.password == params[:password]
+	if user and user.password == params['password']
 	  
 # If everything goes well, we clear the session cookie
 # and set the session ID to the current user's ID,
@@ -133,4 +144,3 @@ get '/database/test/?' do
   'Database Created.'
   
 end
-
